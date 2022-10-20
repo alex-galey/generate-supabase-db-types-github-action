@@ -24,7 +24,7 @@ runs:
       uses: actions/checkout@v3
       with:
         persist-credentials: true
-        fetch-depth: 1
+        fetch-depth: 0
     - name: Set up supabase cli
       uses: supabase/setup-cli@v1.0.2
       with:
@@ -42,6 +42,8 @@ runs:
         fi
         supabase link --project-ref ${SUPABASE_REF_ID} --password ${DB_PASSWORD}
         supabase gen types typescript --db-url "postgresql://postgres:${DB_PASSWORD}@db.${SUPABASE_REF_ID}.supabase.co:6543/postgres" > ${OUTPUT_PATH}
+    - name: Pull Changes
+      run: git pull
     - name: Check for file changes & commit files
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
