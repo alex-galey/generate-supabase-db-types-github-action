@@ -45,12 +45,12 @@ runs:
     - name: Pull Changes
       shell: bash
       run: |
-      if git rev-parse --quiet --verify supabot/update-database-types > /dev/null; then
-        git checkout supabot/update-database-types
-        git reset --hard HEAD~1
-        git push --force
-        git checkout main
-      fi
+        if git rev-parse --quiet --verify supabot/update-database-types > /dev/null; then
+          git checkout supabot/update-database-types
+          git reset --hard HEAD~1
+          git push --force
+          git checkout main
+        fi
     - name: Check for file changes & commit files
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
